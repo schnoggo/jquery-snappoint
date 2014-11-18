@@ -1,9 +1,9 @@
 /*
  *	SnapPoint jQuery Plugin
- *	Version 2.05
+ *	Version 2.06
  *	Author: Robert Spangler (http://robspangler.com/)
  *
- *	Copyright (c) 2012
+ *	Copyright (c) 2012-2014
  *	Licensed under the MIT license.
  *
  *
@@ -39,7 +39,9 @@
 			outerTopOffset: 200,	// Number of pixels for the downward vertical offset (relative to the top of your snapping container)
 			innerTopOffset: 0,		// Number of pixels for the upward vertical offset (relative to the top of your snapping container)
 			outerLeftOffset: 200,	// Number of pixels for the outer horizontal offset (relative to the right of your snapping container)
-			innerLeftOffset: 0		// Number of pixels for the inner horizontal offset (relative to the left of your snapping container)
+			innerLeftOffset: 0,		// Number of pixels for the inner horizontal offset (relative to the left of your snapping container)
+			pageTopOffset: 0        // Number of pixels not in scrollable page content (for fixed top navigation bars)
+			
 		};
 		    options = $.extend({}, defaults, options);
 		    elArray = this;
@@ -56,7 +58,7 @@
 		function snapPointInit() {
 			elArray.each(function(){
 				var position = $(this).position();
-				elementPosTop = position.top;
+				elementPosTop = position.top - options.pageTopOffset;
 				elementPosLeft = position.left;
 
 				windowPosTop = $(jQuery.browser.webkit ? 'body' : 'html').scrollTop(); /*webkit uses body, others use html*/
